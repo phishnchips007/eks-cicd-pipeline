@@ -55,7 +55,7 @@ jobs:
             --record || \
           kubectl create deployment cicd-app \
             --image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-	  kubectl apply -f service.yml
+          kubectl apply -f service.yml
 
       - name: Verify deployment
         run: |
