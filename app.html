@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ali Blain | CI/CD Pipeline</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0a;
+      font-family: monospace;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container { width: 100%; max-width: 700px; padding: 40px 20px; }
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { color: #00aaff; font-size: 2.2em; margin: 0 0 6px; }
+    .status-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #00aa44; display: inline-block;
+      margin-right: 6px; animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .pipeline {
+      display: flex; align-items: center;
+      justify-content: center; gap: 0;
+      margin-bottom: 40px; flex-wrap: wrap;
+    }
+    .stage { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .stage-box {
+      background: #111; border: 1px solid #00aa44;
+      border-radius: 8px; padding: 12px 18px;
+      text-align: center; min-width: 100px;
+    }
+    .stage-icon { font-size: 1.4em; }
+    .stage-label { color: #555; font-size: 0.7em; text-transform: uppercase; letter-spacing: 1px; }
+    .stage-name { color: #00aa44; font-size: 0.85em; margin-top: 2px; }
+    .arrow { color: #333; font-size: 1.4em; padding: 0 4px; margin-top: -18px; }
+    .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; }
+    .meta-card { background: #111; border: 1px solid #1a1a1a; border-radius: 8px; padding: 14px 16px; }
+    .meta-label { color: #555; font-size: 0.7em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+    .meta-value { color: #00aaff; font-size: 0.9em; word-break: break-all; }
+    .footer { text-align: center; color: #333; font-size: 0.75em; border-top: 1px solid #1a1a1a; padding-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Ali Blain</h1>
+      <p style="color:#00aaff; font-size:1em; margin-bottom:8px;">Automated CI/CD Deployment</p>
+      <p><span class="status-dot"></span><span style="color:#00aa44; font-size:0.85em;">Deployment successful</span></p>
+    </div>
+
+    <div class="pipeline">
+      <div class="stage">
+        <div class="stage-box">
+          <div class="stage-icon">&#128196;</div>
+          <div class="stage-name">Code push</div>
+        </div>
+        <div class="stage-label">trigger</div>
+      </div>
+      <div class="arrow">&#8594;</div>
+      <div class="stage">
+        <div class="stage-box">
+          <div class="stage-icon">&#128736;</div>
+          <div class="stage-name">Docker build</div>
+        </div>
+        <div class="stage-label">build</div>
+      </div>
+      <div class="arrow">&#8594;</div>
+      <div class="stage">
+        <div class="stage-box">
+          <div class="stage-icon">&#128230;</div>
+          <div class="stage-name">Push to ECR</div>
+        </div>
+        <div class="stage-label">push</div>
+      </div>
+      <div class="arrow">&#8594;</div>
+      <div class="stage">
+        <div class="stage-box">
+          <div class="stage-icon">&#9096;</div>
+          <div class="stage-name">Deploy to EKS</div>
+        </div>
+        <div class="stage-label">deploy</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="meta-card">
+        <div class="meta-label">Git commit</div>
+        <div class="meta-value">BUILD_COMMIT_SHA</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Build time</div>
+        <div class="meta-value">BUILD_TIMESTAMP</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Image registry</div>
+        <div class="meta-value">Amazon ECR</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Cluster</div>
+        <div class="meta-value">AWS EKS — us-east-1</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Deployed automatically via GitHub Actions &nbsp;·&nbsp; Every git push triggers this pipeline
+    </div>
+  </div>
+</body>
+</html>
